@@ -4,6 +4,7 @@ import axios from "axios";
 import axiosWithAuth from '../utils/axiosWithAuth'
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
+import {fetchColors} from '../api/fetchColors'
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
@@ -12,8 +13,7 @@ const BubblePage = () => {
   const [isFetching, setIsFetching] = useState(false)
 
   const getColors = () => {
-    axiosWithAuth()
-    .get('/colors')
+    fetchColors()
     .then(res => {
       setColorList(res.data)
     })

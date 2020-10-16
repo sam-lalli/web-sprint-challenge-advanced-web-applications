@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 const initialColor = {
   color: "",
@@ -16,9 +16,6 @@ const ColorList = ({ colors, updateColors, setIsFetching }) => {
     setEditing(true);
     setColorToEdit(color);
   };
-
-  const params = useParams()
-  console.log(params)
 
   const saveEdit = e => {
     e.preventDefault();
