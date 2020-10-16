@@ -35,5 +35,8 @@ test("Fetches data and renders the bubbles", async () => {
   render(<Bubbles colors={colorData}/>);
   await waitFor(async ()=>{
     expect(await screen.findByText(/bubbles/i)).toBeInTheDocument()
+    expect(await screen.findAllByTestId('circle')).toHaveLength(3)
+    
+    //expect(await screen.findAllByTestId('circle')).not.toHaveLength(3)
   })
 });
