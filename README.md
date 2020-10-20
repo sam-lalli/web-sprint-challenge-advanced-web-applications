@@ -28,9 +28,16 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Explain what a token is used for.
+  - it allows the user to be authorized to use private routes
 2. What steps can you take in your web apps to keep your data secure?
+  - axiosWithAuth, tokens, privateRoutes
 3. Describe how web servers work.
+  - when the brower needs a file it sends a request to a web sever, web servers hold data and send that data to the brower when it is requested
 4. Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+  (C, create)
+  (R, read)
+  - put is for (U, update)
+  - delete is for (D, delete)
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade. 
 

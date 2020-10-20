@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+import axiosWithAuth from "../utils/axiosWithAuth";
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, setIsFetching }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -21,10 +22,22 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    setIsFetching(true)
+    axiosWithAuth()
+    .put(`colors/${colorToEdit.id}`, colorToEdit)
+    .then(res => {
+      console.log(res)
+      setIsFetching(false)
+    })
+    .catch(err => console.log(err))
+
+
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth().delete(`colors/${color.id}`)
+    .then(res => console.log(res))
+    .catch(err=> console.log(err))
   };
 
   return (
@@ -32,7 +45,7 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <Link  to={`/protected/${color.id}`} key={color.color} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
@@ -47,10 +60,12 @@ const ColorList = ({ colors, updateColors }) => {
               className="color-box"
               style={{ backgroundColor: color.code.hex }}
             />
-          </li>
+          </Link>
         ))}
       </ul>
       {editing && (
+        <>
+        
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
           <label>
@@ -79,6 +94,7 @@ const ColorList = ({ colors, updateColors }) => {
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>
+        </>
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
